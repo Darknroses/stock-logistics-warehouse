@@ -5,12 +5,12 @@
 {
     "name": "Stock Request Submit",
     "summary": "Add submit state on Stock Requests",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Open Source Integrators, "
               "Odoo Community Association (OCA)",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     'depends': ['stock_request'],
     'data': [
         'views/stock_request_order_views.xml',

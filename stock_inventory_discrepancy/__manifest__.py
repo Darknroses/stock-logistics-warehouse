@@ -6,11 +6,11 @@
     "summary": "Adds the capability to show the discrepancy of every line in "
                "an inventory and to block the inventory validation when the "
                "discrepancy is over a user defined threshold.",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.1.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     "depends": ["stock"],
     "data": [
         'security/stock_inventory_discrepancy_security.xml',
