@@ -138,6 +138,13 @@ class StockMoveLocationWizard(models.TransientModel):
                     )
         return res
 
+    @api.onchange("picking_type_id")
+    def _onchange_picking_type_id(self):
+        if self.picking_type_id.default_location_src_id:
+            self.origin_location_id = self.picking_type_id.default_location_src_id
+        if self.picking_type_id.default_location_dest_id:
+            self.destination_location_id = self.picking_type_id.default_location_dest_id
+
     @api.onchange("origin_location_id")
     def _onchange_origin_location_id(self):
         if not self.env.context.get("origin_location_disable", False):
@@ -238,8 +245,6 @@ class StockMoveLocationWizard(models.TransientModel):
             moves_to_unreserve = move_lines.mapped("move_id")
             # Unreserve in old location
             moves_to_unreserve._do_unreserve()
-            # Change location in move with the new one
-            moves_to_unreserve.write({"location_id": line.destination_location_id.id})
             moves_to_reassign |= moves_to_unreserve
         return moves_to_reassign
 
