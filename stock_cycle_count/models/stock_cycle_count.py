@@ -82,6 +82,7 @@ class StockCycleCount(models.Model):
             "cycle_count_id": self.id,
             "location_ids": [(4, self.location_id.id)],
             "exclude_sublocation": True,
+            "responsible_id": self.responsible_id.id,
         }
 
     @api.model
@@ -94,7 +95,12 @@ class StockCycleCount(models.Model):
             raise UserError(_("You can only confirm cycle counts in state 'Planned'."))
         for rec in self:
             data = rec._prepare_inventory_adjustment()
-            self.env["stock.inventory"].create(data)
+            inv = self.env["stock.inventory"].create(data)
+            if self.company_id.auto_start_inventory_from_cycle_count:
+                inv.prefill_counted_quantity = (
+                    self.company_id.inventory_adjustment_counted_quantities
+                )
+                inv.action_start()
         self.write({"state": "open"})
         return True
 
