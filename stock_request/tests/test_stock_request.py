@@ -1,33 +1,28 @@
 # Copyright 2017 ForgeFlow S.L.
+# Copyright 2022 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 from collections import Counter
 from datetime import datetime
 
 from odoo import exceptions, fields
-from odoo.tests import common
+from odoo.tests import common, new_test_user
 
 
 class TestStockRequest(common.TransactionCase):
     def setUp(self):
-        super(TestStockRequest, self).setUp()
-
+        super().setUp()
         # common models
         self.stock_request = self.env["stock.request"]
         self.request_order = self.env["stock.request.order"]
-
         # refs
         self.stock_request_user_group = self.env.ref(
             "stock_request.group_stock_request_user"
-        )
-        self.stock_request_manager_group = self.env.ref(
-            "stock_request.group_stock_request_manager"
         )
         self.main_company = self.env.ref("base.main_company")
         self.warehouse = self.env.ref("stock.warehouse0")
         self.categ_unit = self.env.ref("uom.product_uom_categ_unit")
         self.virtual_loc = self.env.ref("stock.stock_location_customers")
-
         # common data
         self.company_2 = self.env["res.company"].create(
             {"name": "Comp2", "parent_id": self.main_company.id}
@@ -40,59 +35,46 @@ class TestStockRequest(common.TransactionCase):
         self.wh2 = self.env["stock.warehouse"].search(
             [("company_id", "=", self.company_2.id)], limit=1
         )
-        self.stock_request_user = self._create_user(
-            "stock_request_user",
-            [self.stock_request_user_group.id],
-            [self.main_company.id, self.company_2.id],
+        ctx = {
+            "mail_create_nolog": True,
+            "mail_create_nosubscribe": True,
+            "mail_notrack": True,
+            "no_reset_password": True,
+        }
+        self.stock_request_user = new_test_user(
+            self.env,
+            login="stock_request_user",
+            groups="stock_request.group_stock_request_user",
+            company_ids=[(6, 0, [self.main_company.id, self.company_2.id])],
+            context=ctx,
         )
-        self.stock_request_manager = self._create_user(
-            "stock_request_manager",
-            [self.stock_request_manager_group.id],
-            [self.main_company.id, self.company_2.id],
+        self.stock_request_manager = new_test_user(
+            self.env,
+            login="stock_request_manager",
+            groups="stock_request.group_stock_request_manager",
+            company_ids=[(6, 0, [self.main_company.id, self.company_2.id])],
+            context=ctx,
         )
         self.product = self._create_product("SH", "Shoes", False)
         self.product_company_2 = self._create_product(
             "SH_2", "Shoes", self.company_2.id
         )
-
-        self.ressuply_loc = self.env["stock.location"].create(
-            {
-                "name": "Ressuply",
-                "location_id": self.warehouse.view_location_id.id,
-                "usage": "internal",
-                "company_id": self.main_company.id,
-            }
+        self.ressuply_loc = self._create_location(
+            name="Ressuply",
+            location_id=self.warehouse.view_location_id.id,
+            company_id=self.main_company.id,
         )
-
-        self.ressuply_loc_2 = self.env["stock.location"].create(
-            {
-                "name": "Ressuply",
-                "location_id": self.wh2.view_location_id.id,
-                "usage": "internal",
-                "company_id": self.company_2.id,
-            }
+        self.ressuply_loc_2 = self._create_location(
+            name="Ressuply",
+            location_id=self.wh2.view_location_id.id,
+            company_id=self.company_2.id,
         )
-
-        self.route = self.env["stock.location.route"].create(
-            {
-                "name": "Transfer",
-                "product_categ_selectable": False,
-                "product_selectable": True,
-                "company_id": self.main_company.id,
-                "sequence": 10,
-            }
+        self.route = self._create_location_route(
+            name="Transfer", company_id=self.main_company.id
         )
-
-        self.route_2 = self.env["stock.location.route"].create(
-            {
-                "name": "Transfer",
-                "product_categ_selectable": False,
-                "product_selectable": True,
-                "company_id": self.company_2.id,
-                "sequence": 10,
-            }
+        self.route_2 = self._create_location_route(
+            name="Transfer", company_id=self.company_2.id
         )
-
         self.uom_dozen = self.env["uom.uom"].create(
             {
                 "name": "Test-DozenA",
@@ -102,7 +84,6 @@ class TestStockRequest(common.TransactionCase):
                 "rounding": 0.001,
             }
         )
-
         self.env["stock.rule"].create(
             {
                 "name": "Transfer",
@@ -116,7 +97,6 @@ class TestStockRequest(common.TransactionCase):
                 "company_id": self.main_company.id,
             }
         )
-
         self.env["stock.rule"].create(
             {
                 "name": "Transfer",
@@ -130,25 +110,8 @@ class TestStockRequest(common.TransactionCase):
                 "company_id": self.company_2.id,
             }
         )
-
         self.env["ir.config_parameter"].sudo().set_param(
             "stock.no_auto_scheduler", "True"
-        )
-
-    def _create_user(self, name, group_ids, company_ids):
-        return (
-            self.env["res.users"]
-            .with_context({"no_reset_password": True})
-            .create(
-                {
-                    "name": name,
-                    "password": "demo",
-                    "login": name,
-                    "email": "@".join([name, "test.com"]),
-                    "groups_id": [(6, 0, group_ids)],
-                    "company_ids": [(6, 0, company_ids)],
-                }
-            )
         )
 
     def _create_product(self, default_code, name, company_id, **vals):
@@ -163,10 +126,23 @@ class TestStockRequest(common.TransactionCase):
             )
         )
 
+    def _create_location(self, **vals):
+        return self.env["stock.location"].create(dict(usage="internal", **vals))
+
+    def _create_location_route(self, **vals):
+        return self.env["stock.location.route"].create(
+            dict(
+                product_categ_selectable=False,
+                product_selectable=True,
+                sequence=10,
+                **vals
+            )
+        )
+
 
 class TestStockRequestBase(TestStockRequest):
     def setUp(self):
-        super(TestStockRequestBase, self).setUp()
+        super().setUp()
 
     def test_defaults(self):
         vals = {
@@ -290,20 +266,13 @@ class TestStockRequestBase(TestStockRequest):
 
         # Test onchange_product_id
         stock_request.product_id = product
-        res = stock_request.onchange_product_id()
+        stock_request.onchange_product_id()
 
-        self.assertEqual(
-            res["domain"]["product_uom_id"],
-            [("category_id", "=", product.uom_id.category_id.id)],
-        )
         self.assertEqual(
             stock_request.product_uom_id, self.env.ref("uom.product_uom_kgm")
         )
 
         stock_request.product_id = self.env["product.product"]
-        res = stock_request.onchange_product_id()
-
-        self.assertEqual(res["domain"]["product_uom_id"], [])
 
         # Test onchange_warehouse_id
         wh2_2 = (
@@ -962,7 +931,6 @@ class TestStockRequestBase(TestStockRequest):
         stock_request = self.stock_request.with_user(self.stock_request_user).create(
             vals
         )
-        stock_request.onchange_allow_virtual_location()
         self.assertTrue(stock_request.allow_virtual_location)
         vals = {
             "company_id": self.main_company.id,
@@ -970,7 +938,6 @@ class TestStockRequestBase(TestStockRequest):
             "location_id": self.virtual_loc.id,
         }
         order = self.request_order.with_user(self.stock_request_user).create(vals)
-        order.onchange_allow_virtual_location()
         self.assertTrue(order.allow_virtual_location)
 
     def test_onchange_wh_no_effect_from_order(self):
