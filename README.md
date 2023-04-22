@@ -25,7 +25,7 @@ addon | version | maintainers | summary
 [account_move_line_stock_info](account_move_line_stock_info/) | 14.0.2.2.0 |  | Account Move Line Stock Info
 [procurement_auto_create_group](procurement_auto_create_group/) | 14.0.1.2.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
 [product_quantity_update_force_inventory](product_quantity_update_force_inventory/) | 14.0.1.0.1 |  | Product Quantity Update Force Inventory
-[product_route_profile](product_route_profile/) | 14.0.1.0.1 | [![Kev-Roche](https://github.com/Kev-Roche.png?size=30px)](https://github.com/Kev-Roche) | Add Route profile concept on product
+[product_route_profile](product_route_profile/) | 14.0.1.0.2 | [![Kev-Roche](https://github.com/Kev-Roche.png?size=30px)](https://github.com/Kev-Roche) | Add Route profile concept on product
 [scrap_location_filter](scrap_location_filter/) | 14.0.1.0.0 | [![opensourceintegrators](https://github.com/opensourceintegrators.png?size=30px)](https://github.com/opensourceintegrators) | Filters scrap location
 [scrap_reason_code](scrap_reason_code/) | 14.0.1.0.1 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Reason code for scrapping
 [stock_archive_constraint](stock_archive_constraint/) | 14.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Stock archive constraint
@@ -33,11 +33,12 @@ addon | version | maintainers | summary
 [stock_available_base_exclude_location](stock_available_base_exclude_location/) | 14.0.1.0.1 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Base module to exclude locations for product available quantities
 [stock_available_immediately](stock_available_immediately/) | 14.0.1.0.0 |  | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 14.0.1.0.5 |  | Consider the production potential is available to promise
+[stock_available_portal](stock_available_portal/) | 14.0.1.0.0 | [![geomer198](https://github.com/geomer198.png?size=30px)](https://github.com/geomer198) [![CetmixGitDrone](https://github.com/CetmixGitDrone.png?size=30px)](https://github.com/CetmixGitDrone) | Show product quantity available to promise in portal
 [stock_available_unreserved](stock_available_unreserved/) | 14.0.1.2.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 14.0.1.0.2 |  | Stock Quantity Change Reason
 [stock_cycle_count](stock_cycle_count/) | 14.0.1.4.2 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
-[stock_demand_estimate](stock_demand_estimate/) | 14.0.1.1.0 |  | Allows to create demand estimates.
-[stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 14.0.1.1.0 |  | Allows to create demand estimates.
+[stock_demand_estimate](stock_demand_estimate/) | 14.0.1.2.0 |  | Allows to create demand estimates.
+[stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 14.0.1.2.0 |  | Allows to create demand estimates.
 [stock_exception](stock_exception/) | 14.0.1.0.1 |  | Custom exceptions on stock picking
 [stock_free_quantity](stock_free_quantity/) | 14.0.1.1.0 |  | Stock Free Quantity
 [stock_generate_putaway_from_inventory](stock_generate_putaway_from_inventory/) | 14.0.1.0.0 | [![pierrickbrun](https://github.com/pierrickbrun.png?size=30px)](https://github.com/pierrickbrun) [![bealdav](https://github.com/bealdav.png?size=30px)](https://github.com/bealdav) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) | Generate Putaway locations per Product deduced from Inventory
@@ -62,7 +63,8 @@ addon | version | maintainers | summary
 [stock_location_zone](stock_location_zone/) | 14.0.1.0.0 |  | Classify locations with zones.
 [stock_measuring_device](stock_measuring_device/) | 14.0.1.0.1 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement a common interface for measuring and weighing devices
 [stock_measuring_device_zippcube](stock_measuring_device_zippcube/) | 14.0.1.0.1 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement interface with Bosche Zippcube devicesfor packaging measurement
-[stock_move_auto_assign](stock_move_auto_assign/) | 14.0.1.0.0 |  | Try to reserve moves when goods enter in a location
+[stock_move_auto_assign](stock_move_auto_assign/) | 14.0.1.2.0 |  | Try to reserve moves when goods enter in a location
+[stock_move_auto_assign_auto_release](stock_move_auto_assign_auto_release/) | 14.0.1.1.0 |  | Auto release moves after auto assign
 [stock_move_common_dest](stock_move_common_dest/) | 14.0.1.0.0 |  | Adds field for common destination moves
 [stock_move_location](stock_move_location/) | 14.0.1.4.1 |  | This module allows to move all stock in a stock location to an other one.
 [stock_mts_mto_mrp_rule](stock_mts_mto_mrp_rule/) | 14.0.1.0.1 | [![geomer198](https://github.com/geomer198.png?size=30px)](https://github.com/geomer198) [![CetmixGitDrone](https://github.com/CetmixGitDrone.png?size=30px)](https://github.com/CetmixGitDrone) | Stock MTS+MTO MRP Rule
@@ -80,6 +82,7 @@ addon | version | maintainers | summary
 [stock_picking_cancel_confirm](stock_picking_cancel_confirm/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Picking Cancel Confirm
 [stock_picking_procure_method](stock_picking_procure_method/) | 14.0.1.0.0 |  | Allows to force the procurement method from the picking
 [stock_picking_show_linked](stock_picking_show_linked/) | 14.0.1.0.1 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
+[stock_picking_volume](stock_picking_volume/) | 14.0.1.0.1 | [![lmignon](https://github.com/lmignon.png?size=30px)](https://github.com/lmignon) | Compute volume information on stock moves and pickings
 [stock_product_qty_by_packaging](stock_product_qty_by_packaging/) | 14.0.1.0.0 |  | Compute product quantity to pick by packaging
 [stock_pull_list](stock_pull_list/) | 14.0.1.1.2 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
 [stock_putaway_method](stock_putaway_method/) | 14.0.1.0.0 | [![asaunier](https://github.com/asaunier.png?size=30px)](https://github.com/asaunier) | Add the putaway strategy method back, removed from the stock module in Odoo 12
@@ -88,18 +91,18 @@ addon | version | maintainers | summary
 [stock_quant_reservation_info](stock_quant_reservation_info/) | 14.0.1.0.5 |  | Allows to see the reserved info of Products
 [stock_quant_reservation_info_mrp](stock_quant_reservation_info_mrp/) | 14.0.1.1.0 |  | Allows to see the manufacturing order related to the reserved info of Products
 [stock_quant_view_reservation](stock_quant_view_reservation/) | 14.0.1.0.1 |  | Allows to see details of reservations on a quant
-[stock_request](stock_request/) | 14.0.1.5.0 |  | Internal request for stock
+[stock_request](stock_request/) | 14.0.1.5.1 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 14.0.1.0.3 |  | Internal request for stock
 [stock_request_cancel_confirm](stock_request_cancel_confirm/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Request Cancel Confirm
 [stock_request_direction](stock_request_direction/) | 14.0.1.0.1 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | From or to your warehouse?
-[stock_request_kanban](stock_request_kanban/) | 14.0.1.1.0 |  | Adds a stock request order, and takes stock requests as lines
-[stock_request_mrp](stock_request_mrp/) | 14.0.1.0.1 |  | Manufacturing request for stock
+[stock_request_kanban](stock_request_kanban/) | 14.0.1.1.1 |  | Adds a stock request order, and takes stock requests as lines
+[stock_request_mrp](stock_request_mrp/) | 14.0.1.0.2 |  | Manufacturing request for stock
 [stock_request_partner](stock_request_partner/) | 14.0.1.0.1 |  | Allow to define partner in Stock Request
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.1.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
 [stock_request_purchase](stock_request_purchase/) | 14.0.1.0.0 |  | Internal request for stock
-[stock_request_submit](stock_request_submit/) | 14.0.1.2.0 |  | Add submit state on Stock Requests
+[stock_request_submit](stock_request_submit/) | 14.0.1.3.0 |  | Add submit state on Stock Requests
 [stock_request_tier_validation](stock_request_tier_validation/) | 14.0.1.0.0 |  | Extends the functionality of Stock Requests to support a tier validation process.
-[stock_reserve](stock_reserve/) | 14.0.1.0.0 |  | Stock reservations on products
+[stock_reserve](stock_reserve/) | 14.0.2.0.0 |  | Stock reservations on products
 [stock_reserve_rule](stock_reserve_rule/) | 14.0.1.1.1 |  | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 |  | Allows to search for picking from supplierinfo code
 [stock_secondary_unit](stock_secondary_unit/) | 14.0.1.0.1 |  | Get product quantities in a secondary unit
